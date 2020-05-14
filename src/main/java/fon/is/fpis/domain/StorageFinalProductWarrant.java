@@ -1,5 +1,7 @@
 package fon.is.fpis.domain;
 
+import java.time.LocalDate;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -7,9 +9,9 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @SuperBuilder
-public class InternalCheckReportItem implements BaseEntity {
+public class StorageFinalProductWarrant implements BaseEntity {
 	
 	private Long id;
-	private String note;
-	private Product product;
+	private LocalDate date;
+	
 }
