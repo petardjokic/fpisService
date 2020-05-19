@@ -9,7 +9,7 @@ import fon.is.fpis.service.dto.InternalCheckPlanSearchResponse;
 
 public interface StorageFinalProductWarrantService {
 
-	public StorageFinalProductWarrant getStorageFinalProductWarrantnById(Long id);
+	public StorageFinalProductWarrant getById(Long id);
 
 	public List<StorageFinalProductWarrant> getAllStorageFinalProductWarrants();
 
