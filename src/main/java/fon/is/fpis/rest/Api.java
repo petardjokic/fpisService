@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fon.is.fpis.domain.InternalCheckPlan;
 import fon.is.fpis.domain.Product;
 import fon.is.fpis.domain.StorageFinalProductWarrant;
+import fon.is.fpis.domain.StorageWarantItem;
 import fon.is.fpis.domain.Worker;
 import fon.is.fpis.service.InternalCheckPlanService;
 import fon.is.fpis.service.ProductService;
@@ -45,6 +46,12 @@ public class Api {
 	public StorageFinalProductWarrant getWarrant(@PathVariable Long id) {
 		log.info("Request get plan with ID: {}", id);
 		return warrantService.getById(id);
+	}
+	
+	@GetMapping(path = "warrants/{id}/items/{orderNumber}")
+	public StorageWarantItem getWarrantItem(@PathVariable Long id,@PathVariable Integer orderNumber) {
+		log.info("Request get plan with ID: {}", id);
+		return warrantService.getById(id).getItems().stream().filter(x -> x.getOrderNumber().equals(orderNumber)).findFirst().get();
 	}
 	
 	@GetMapping(path = "internal-check-plans/{id}")

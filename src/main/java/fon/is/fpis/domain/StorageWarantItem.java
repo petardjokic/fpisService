@@ -1,7 +1,5 @@
 package fon.is.fpis.domain;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
