@@ -35,10 +35,8 @@ public class InternalCheckPlanServiceImpl implements InternalCheckPlanService {
 
 	@Override
 	public InternalCheckPlan getInternalCheckPlanById(Long id) {
-		Optional<InternalCheckPlan> plan = planRepo.findById(id);
-		Optional.ofNullable(plan)
+		return planRepo.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException(String.format("Plan with ID %s does not exist", id)));
-		return plan.get();
 	}
 
 	@Override
@@ -54,8 +52,7 @@ public class InternalCheckPlanServiceImpl implements InternalCheckPlanService {
 
 	@Override
 	public InternalCheckPlan saveInternalCheckPlan(InternalCheckPlan plan) {
-		// TODO Auto-generated method stub
-		return null;
+		return planRepo.saveAndFlush(plan);
 	}
 
 	@Override

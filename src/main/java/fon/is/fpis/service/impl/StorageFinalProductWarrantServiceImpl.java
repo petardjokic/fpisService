@@ -42,7 +42,7 @@ public class StorageFinalProductWarrantServiceImpl implements StorageFinalProduc
 
 	@Override
 	public StorageFinalProductWarrant getById(Long id) {
-		return warrantRepo.findById(id).get();
+		return warrantRepo.findById(id).orElseThrow(() -> new IllegalArgumentException(String.format("Warrant with ID %s does not exist", id)));
 	}
 
 	@Override
