@@ -60,9 +60,8 @@ public class StorageFinalProductWarrantServiceImpl implements StorageFinalProduc
 	}
 
 	@Override
-	public InternalCheckPlan saveStorageFinalProductWarrant(InternalCheckPlan plan) {
-		// TODO Auto-generated method stub
-		return null;
+	public StorageFinalProductWarrant save(StorageFinalProductWarrant warrant) {
+		return warrantRepo.saveAndFlush(warrant);
 	}
 
 	@Override

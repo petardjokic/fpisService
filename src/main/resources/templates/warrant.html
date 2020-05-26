@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>App</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div class="jumbotron">
+		<h1 class="display-3">Storage Warrant</h1>
+		<hr class="my-4">
+		<div class="container">
+			<form id="warrantForm" action="#" th:action="@{/view/warrants}"
+				method="post">
+				<div class="form-group">
+					<label for="warrantId">Warrant ID:</label>
+					<div class="row">
+						<div class="col-sm">
+							<input type="number" th:field="${dto.warrant.id}"
+								class="form-control" id="warrantId"
+								placeholder="Enter warrant Id" name="warrantId">
+						</div>
+						<div id="searchWarrantBtn" class="col-sm">
+							<button class="btn btn-outline-primary" type="submit"
+								name="findWarrant">Search</button>
+						</div>
+						<div class="col-sm"></div>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<label for="warrantDate">Date:</label> <input type="text"
+						th:field="${dto.warrant.date}" class="form-control"
+						id="warrantDate" placeholder="Enter date" name="warrantDate">
+				</div>
+				<hr />
+				<div class="card bg-light">
+					<div class="card-body">
+						<h5 class="card-title">Items</h5>
+						<div class="card-text">
+							<div class="form-group">
+								<label for="ItemId">Item order no.:</label>
+								<div class="row">
+									<div class="col-sm">
+										<input type="number" th:field="${dto.item.orderNumber}"
+											class="form-control" id="itemId"
+											placeholder="Enter item order No." name="itemId">
+									</div>
+									<div id="searchItemBtn" class="col-sm">
+										<button class="btn btn-outline-primary" type="submit"
+											name="findItem">Search</button>
+									</div>
+									<div class="col-sm"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="ItemNote">Note:</label> <input type="text"
+									th:field="${dto.item.note}" class="form-control"
+									id="warrantNote" placeholder="Enter item note"
+									name="warrantNote">
+							</div>
+							<div class="form-group">
+								<label for="ItemAmount">Amount:</label> <input type="number"
+									th:field="${dto.item.amount}" class="form-control"
+									id="warrantAmount" placeholder="Enter item amount"
+									name="warrantAmount">
+							</div>
+							<div class="form-group">
+								<label for="ItemAmount">Product:</label><select
+									class="form-control" th:field="${dto.item.product.id}">
+									<option th:each="product : ${allProducts}"
+										th:value="${product.id}" th:text="${product.name}">Default
+										select</option>
+								</select>
+							</div>
+
+							<button class="btn btn-outline-primary" type="submit"
+								name="addItem">Save</button>
+							<button class="btn btn-outline-primary" type="submit"
+								name="changeItem">Change</button>
+							<button class="btn btn-outline-primary" type="submit"
+								name="deleteItem">Delete</button>
+							<hr />
+							<table class="table" th:field="${dto.warrant.items}">
+								<thead>
+									<tr>
+										<th scope="col">Order no.</th>
+										<th scope="col">Note</th>
+										<th scope="col">Amount</th>
+										<th scope="col">Product</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="item, itemStat : ${dto.warrant.items}">
+										<th><input type="hidden" readonly class="form-control"
+											th:field="${dto.warrant.items[__${itemStat.index}__].orderNumber}" />
+											<p th:text="${item.orderNumber}"></p>
+										</th>
+										<td><input type="hidden" readonly class="form-control"
+											th:field="${dto.warrant.items[__${itemStat.index}__].note}" />
+											<p th:text="${item.note}"></p>
+										</td>
+										<td><input type="hidden" readonly class="form-control"
+											th:field="${dto.warrant.items[__${itemStat.index}__].amount}" />
+											<p th:text="${item.amount}"></p>
+										</td>
+										<td><input type="hidden" readonly class="form-control"
+											th:field="${dto.warrant.items[__${itemStat.index}__].product}" />
+											<p th:text="${item.product.name}"></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<button class="btn btn-outline-primary" type="submit"
+								name="saveWarrant">Save</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
