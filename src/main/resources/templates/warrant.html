@@ -18,10 +18,15 @@
 <body>
 	<div class="jumbotron">
 		<h1 class="display-3">Storage Warrant</h1>
+		<div class="lead" th:if="${message.show}">
+			<div th:classappend="'alert alert-' + ${message.type}" role="alert"
+				th:text="${message.value}">This is a alert—check it out!</div>
+		</div>
+
 		<hr class="my-4">
 		<div class="container">
-			<form id="warrantForm" action="#" th:action="@{/view/warrants}"
-				method="post">
+			<form id="warrantForm" class="warrantForm" action="#"
+				th:action="@{/view/warrants}" method="post">
 				<div class="form-group">
 					<label for="warrantId">Warrant ID:</label>
 					<div class="row">
@@ -31,16 +36,16 @@
 								placeholder="Enter warrant Id" name="warrantId">
 						</div>
 						<div id="searchWarrantBtn" class="col-sm">
-							<button class="btn btn-outline-primary" type="submit"
-								name="findWarrant">Search</button>
+							<button onclick="findWarrantValidation()" class="btn btn-outline-primary"
+								type="submit" name="findWarrant">Search</button>
 						</div>
 						<div class="col-sm"></div>
 					</div>
 
 				</div>
 				<div class="form-group">
-					<label for="warrantDate">Date:</label> <input type="text"
-						th:field="${dto.warrant.date}" class="form-control"
+					<label for="warrantDate">Date:</label> <input type="date"
+						th:field="${{dto.warrant.date}}" class="form-control"
 						id="warrantDate" placeholder="Enter date" name="warrantDate">
 				</div>
 				<hr />
@@ -57,7 +62,7 @@
 											placeholder="Enter item order No." name="itemId">
 									</div>
 									<div id="searchItemBtn" class="col-sm">
-										<button class="btn btn-outline-primary" type="submit"
+										<button onclick="findItemValidation()" class="btn btn-outline-primary" type="submit"
 											name="findItem">Search</button>
 									</div>
 									<div class="col-sm"></div>
@@ -84,11 +89,11 @@
 								</select>
 							</div>
 
-							<button class="btn btn-outline-primary" type="submit"
+							<button onclick="addItemValidation()" class="btn btn-outline-primary" type="submit"
 								name="addItem">Save</button>
-							<button class="btn btn-outline-primary" type="submit"
+							<button onclick="changeItemValidation()" class="btn btn-outline-primary" type="submit"
 								name="changeItem">Change</button>
-							<button class="btn btn-outline-primary" type="submit"
+							<button onclick="deleteItemValidation()" class="btn btn-outline-primary" type="submit"
 								name="deleteItem">Delete</button>
 							<hr />
 							<table class="table" th:field="${dto.warrant.items}">
@@ -104,20 +109,16 @@
 									<tr th:each="item, itemStat : ${dto.warrant.items}">
 										<th><input type="hidden" readonly class="form-control"
 											th:field="${dto.warrant.items[__${itemStat.index}__].orderNumber}" />
-											<p th:text="${item.orderNumber}"></p>
-										</th>
+											<p th:text="${item.orderNumber}"></p></th>
 										<td><input type="hidden" readonly class="form-control"
 											th:field="${dto.warrant.items[__${itemStat.index}__].note}" />
-											<p th:text="${item.note}"></p>
-										</td>
+											<p th:text="${item.note}"></p></td>
 										<td><input type="hidden" readonly class="form-control"
 											th:field="${dto.warrant.items[__${itemStat.index}__].amount}" />
-											<p th:text="${item.amount}"></p>
-										</td>
+											<p th:text="${item.amount}"></p></td>
 										<td><input type="hidden" readonly class="form-control"
 											th:field="${dto.warrant.items[__${itemStat.index}__].product}" />
-											<p th:text="${item.product.name}"></p>
-										</td>
+											<p th:text="${item.product.name}"></p></td>
 									</tr>
 								</tbody>
 							</table>
@@ -125,11 +126,50 @@
 					</div>
 				</div>
 				<hr />
-				<button class="btn btn-outline-primary" type="submit"
-								name="saveWarrant">Save</button>
+				<button onclick="saveWarrantValidation()" class="btn btn-outline-primary" type="submit"
+					name="saveWarrant">Save</button>
 			</form>
 		</div>
 	</div>
+	<script>
+		function findWarrantValidation() {
+			this.resetRequiredFields();
+			document.getElementById("warrantId").required = true;
+		}
+		function findItemValidation() {
+			this.resetRequiredFields();
+			document.getElementById("warrantId").required = true;
+			document.getElementById("itemId").required = true;
+		}
+		function addItemValidation() {
+			this.resetRequiredFields();
+			document.getElementById("warrantNote").required = true;
+			document.getElementById("warrantAmount").required = true;
+		}
+		function changeItemValidation() {
+			this.resetRequiredFields();
+			document.getElementById("itemId").required = true;
+			document.getElementById("warrantNote").required = true;
+			document.getElementById("warrantAmount").required = true;
+		}
+		function deleteItemValidation() {
+			this.resetRequiredFields();
+			document.getElementById("itemId").required = true;
+		}
+		function saveWarrantValidation() {
+			this.resetRequiredFields();
+			document.getElementById("warrantId").required = true;
+			document.getElementById("warrantDate").required = true;
+		}
+		function resetRequiredFields() {
+			document.getElementById("warrantId").required = false;
+			document.getElementById("warrantDate").required = false;
+			document.getElementById("itemId").required = false;
+			document.getElementById("warrantNote").required = false;
+			document.getElementById("warrantAmount").required = false;
+
+		}
+	</script>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 package fon.is.fpis.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fon.is.fpis.dao.WorkerRepository;
@@ -18,9 +17,9 @@ public class WorkerServiceImpl implements WorkerService{
 	
 	public WorkerServiceImpl(WorkerRepository workerRepo) {
 		this.workerRepo = workerRepo;
-		this.workerRepo.save(Worker.builder().firstName("Work1").lastName("Hard1").position(WORKER).build());
-		this.workerRepo.save(Worker.builder().firstName("Work2").lastName("Hard2").position(WORKER).build());
-		this.workerRepo.save(Worker.builder().firstName("Work3").lastName("Hard3").position(WORKER).build());
+//		this.workerRepo.save(Worker.builder().firstName("Worker1").lastName("Hard1").position(WORKER).build());
+//		this.workerRepo.save(Worker.builder().firstName("Worker2").lastName("Hard2").position(WORKER).build());
+//		this.workerRepo.save(Worker.builder().firstName("Worker3").lastName("Hard3").position(WORKER).build());
 	}
 
 	@Override

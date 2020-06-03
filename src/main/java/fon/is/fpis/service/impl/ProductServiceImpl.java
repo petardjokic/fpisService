@@ -2,7 +2,6 @@ package fon.is.fpis.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fon.is.fpis.dao.ProductRepository;
@@ -16,9 +15,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	public ProductServiceImpl(ProductRepository productRepo) {
 		this.productRepo = productRepo;
-		productRepo.save(Product.builder().name("Product1").build());
-		productRepo.save(Product.builder().name("Product2").build());
-		productRepo.save(Product.builder().name("Product3").build());
+//		productRepo.save(Product.builder().name("Product1").build());
+//		productRepo.save(Product.builder().name("Product2").build());
+//		productRepo.save(Product.builder().name("Product3").build());
 	}
 
 	@Override

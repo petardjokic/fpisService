@@ -20,8 +20,13 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "workers")
 public class Worker implements BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4620103664979820327L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_workers")
-	@Column(name = "id")
+	@Column(name = "worker_id")
 	private Long id;
 	@Column(name = "first_name")
 	private String firstName;

@@ -12,7 +12,7 @@ class ProductRepositoryTest extends BasicSpringTest{
 	@Autowired
 	ProductRepository productRepo;
 
-	@Test
+	//@Test
 	void test() {
 		Product product1 = Product.builder().name("Productooo").build();
 		Product product2 = productRepo.save(product1);

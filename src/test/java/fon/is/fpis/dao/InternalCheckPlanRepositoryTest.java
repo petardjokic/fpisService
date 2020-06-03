@@ -21,7 +21,7 @@ class InternalCheckPlanRepositoryTest extends BasicSpringTest{
 	@Autowired
 	WorkerRepository workerRepo;
 
-	@Test
+	//@Test
 	void test() {
 		Worker worker1 = Worker.builder().firstName("Rad").lastName("Wer").position(WorkerPosition.UNKNOWN).build();
 		Worker worker2 = Worker.builder().firstName("L").lastName("Skal").position(WorkerPosition.UNKNOWN).build();
