@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fon.is.fpis.domain.InternalCheckPlan;
 import fon.is.fpis.domain.Product;
-import fon.is.fpis.domain.StorageFinalProductWarrant;
-import fon.is.fpis.domain.StorageWarantItem;
 import fon.is.fpis.domain.Worker;
 import fon.is.fpis.service.InternalCheckPlanService;
 import fon.is.fpis.service.ProductService;
-import fon.is.fpis.service.StorageFinalProductWarrantService;
 import fon.is.fpis.service.WorkerService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,25 +35,10 @@ public class Api {
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired
-	private StorageFinalProductWarrantService warrantService;
-	
-	@GetMapping(path = "warrants/{id}")
-	public StorageFinalProductWarrant getWarrant(@PathVariable Long id) {
-		log.info("Request get plan with ID: {}", id);
-		return warrantService.getById(id);
-	}
-	
-	@GetMapping(path = "warrants/{id}/items/{orderNumber}")
-	public StorageWarantItem getWarrantItem(@PathVariable Long id,@PathVariable Integer orderNumber) {
-		log.info("Request get plan with ID: {}", id);
-		return warrantService.getById(id).getItems().stream().filter(x -> x.getOrderNumber().equals(orderNumber)).findFirst().get();
-	}
-	
 	@GetMapping(path = "internal-check-plans/{id}")
 	public InternalCheckPlan getInternalCheckPlanById(@PathVariable Long id) {
 		log.info("Request get plan with ID: {}", id);
-		return planService.getInternalCheckPlanById(id);
+		return planService.getInternalCheckPlanById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID."));
 	}
 	
 	@GetMapping(path = "internal-check-plans")
@@ -71,7 +53,7 @@ public class Api {
 		return planService.saveInternalCheckPlan(plan);
 	}
 	
-	@DeleteMapping(path = "internal-check-plans")
+	@DeleteMapping(path = "internal-check-plans/{id}")
 	public void deleteInternalCheckPlanById(@PathVariable Long id) {
 		log.info("Request delete plan with ID: {}", id);
 		planService.deleteInternalCheckPlanById(id);

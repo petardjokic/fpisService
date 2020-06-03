@@ -20,9 +20,14 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "products")
 public class Product implements BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5638159329978070252L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_products")
-	@Column(name = "id")
+	@Column(name = "product_id")
 	private Long id;
-	@Column(name = "name")
+	@Column(name = "product_name")
 	private String name;
 }

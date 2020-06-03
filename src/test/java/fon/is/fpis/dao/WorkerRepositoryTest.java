@@ -15,7 +15,7 @@ class WorkerRepositoryTest extends BasicSpringTest {
 	@Autowired
 	WorkerRepository workerRepo;
 	
-	@Test
+	//@Test
 	void test() {
 		Worker worker1 = Worker.builder().firstName("Petar").lastName("Djokic").position(WorkerPosition.UNKNOWN).build();
 		workerRepo.save(worker1);

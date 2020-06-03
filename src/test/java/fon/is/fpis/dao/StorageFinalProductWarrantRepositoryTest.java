@@ -21,7 +21,7 @@ class StorageFinalProductWarrantRepositoryTest extends BasicSpringTest {
 	@Autowired
 	ProductRepository productRepo;
 
-	@Test
+	//@Test
 	void test() {
 		Product product1 = Product.builder().name("Productooo").build();
 		Product product2 = Product.builder().name("elstra").build();

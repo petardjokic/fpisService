@@ -25,13 +25,18 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "storage_final_product_warrant")
 public class StorageFinalProductWarrant implements BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8028322804733923812L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_warrant")
-	@Column(name = "id")
+	@Column(name = "warrant_id")
 	private Long id;
-	@Column(name = "date")
+	@Column(name = "warrant_date")
 	private LocalDate date;
-	@ElementCollection()
-	@CollectionTable(name = "storage_final_product_warrant_items", joinColumns = @JoinColumn(referencedColumnName = "id", name = "warrant_id"))
+	@ElementCollection
+	@CollectionTable(name = "storage_final_product_warrant_items", joinColumns = @JoinColumn(referencedColumnName = "warrant_id", name = "warrant_id"))
 	private List<StorageWarantItem> items = new ArrayList<>();
 	
 }

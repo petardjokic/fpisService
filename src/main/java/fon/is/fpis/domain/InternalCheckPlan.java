@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,19 +22,24 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "internal_check_plans")
 public class InternalCheckPlan implements BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6438979154739058225L;
+	
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_internal_check_plans")
-	@Column(name = "id")
+	@Column(name = "plan_id")
 	private Long id;
-	@Column(name= "date")
+	@Column(name= "plan_date")
 	private LocalDate date;
 	@Column(name= "check_subject")
 	private String checkSubject;
-	@Column(name = "description")
+	@Column(name = "plan_description")
 	private String description;
 	@OneToOne
-	@JoinColumn(name = "sender_id")
+	@JoinColumn
 	private Worker sender;
 	@OneToOne
-	@JoinColumn(name = "receiver_id")
+	@JoinColumn
 	private Worker receiver;
 }
