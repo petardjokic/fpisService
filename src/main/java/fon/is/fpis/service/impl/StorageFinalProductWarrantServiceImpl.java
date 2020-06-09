@@ -55,9 +55,14 @@ public class StorageFinalProductWarrantServiceImpl implements StorageFinalProduc
 	}
 
 	@Override
-	public boolean deleteStorageFinalProductWarrantById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	@Transactional
+	public void deleteById(Long id) {
+		warrantRepo.deleteById(id);
+	}
+
+	@Override
+	public boolean exists(Long id) {
+		return warrantRepo.existsById(id);
 	}
 
 }

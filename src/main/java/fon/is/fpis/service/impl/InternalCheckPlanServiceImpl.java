@@ -50,6 +50,7 @@ public class InternalCheckPlanServiceImpl implements InternalCheckPlanService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteInternalCheckPlanById(Long id) {
 		planRepo.deleteById(id);
 	}

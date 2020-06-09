@@ -31,7 +31,7 @@ public class WarrantController {
 
 	@RequestMapping(path = "warrants")
 	public String getWarrant(Model model) {
-		
+
 		StorageFinalProductWarrant warrant = new StorageFinalProductWarrant();
 		StorageWarantItem item = new StorageWarantItem();
 
@@ -42,7 +42,7 @@ public class WarrantController {
 
 	@RequestMapping(path = "warrants", params = { "findWarrant" })
 	public String getWarrantbyId(WarrantDto war, Model model) {
-		
+
 		log.info("WARRANT ID: {}", war.getWarrant().getId());
 		StorageFinalProductWarrant warrant = warrantService.getById(war.getWarrant().getId())
 				.orElse(new StorageFinalProductWarrant());
@@ -139,7 +139,28 @@ public class WarrantController {
 		StorageFinalProductWarrant warrant = new StorageFinalProductWarrant();
 		StorageWarantItem item = new StorageWarantItem();
 		model.addAttribute("dto", new WarrantDto(warrant, item));
-		model.addAttribute("message", InfoMessage.builder().show(true).value("Warrant saved!").type("success").build());
+		model.addAttribute("message", InfoMessage.builder().show(true)
+				.value("Warrant saved! ID: " + war.getWarrant().getId()).type("success").build());
+		return "warrant";
+	}
+
+	@RequestMapping(path = "warrants", params = { "deleteWarrant" })
+	public String deleteWarrant(WarrantDto war, Model model) {
+		log.info("Delete warrant envoked");
+		WarrantDto dto = null;
+		InfoMessage message = null;
+		if (warrantService.exists(war.getWarrant().getId())) {
+			warrantService.deleteById(war.getWarrant().getId());
+			StorageFinalProductWarrant warrant = new StorageFinalProductWarrant();
+			StorageWarantItem item = new StorageWarantItem();
+			dto = new WarrantDto(warrant, item);
+			message = InfoMessage.builder().show(true).value("Warrant deleted!").type("success").build();
+		} else {
+			dto = war;
+			message = InfoMessage.builder().show(true).value("Invalid ID!").type("danger").build();
+		}
+		model.addAttribute("dto", dto);
+		model.addAttribute("message", message);
 		return "warrant";
 	}
 
