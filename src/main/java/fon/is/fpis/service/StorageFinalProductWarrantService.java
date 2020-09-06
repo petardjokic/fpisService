@@ -13,5 +13,7 @@ public interface StorageFinalProductWarrantService {
 
 	public StorageFinalProductWarrant save(StorageFinalProductWarrant plan);
 
-	public boolean deleteStorageFinalProductWarrantById(Long id);
+	public void deleteById(Long id);
+	
+	public boolean exists(Long id);
 }
